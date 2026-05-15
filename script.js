@@ -26,25 +26,24 @@ document.addEventListener('DOMContentLoaded', () => {
                 { y: 0, opacity: 1, duration: 1.2, stagger: 0.15, ease: "power4.out", onComplete: () => ScrollTrigger.refresh() }, "-=0.6"
             );
 
-    // --- 2. Lenis Smooth Scrolling (Desktop Only) ---
-    let lenis;
-    if (window.innerWidth >= 1024) {
-        lenis = new Lenis({
-            duration: 1.2,
-            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-            smoothWheel: true,
-            smoothTouch: false
-        });
+    // --- 2. Lenis Smooth Scrolling ---
+    const isMobile = window.innerWidth < 1024;
+    const lenis = new Lenis({
+        duration: isMobile ? 0.8 : 1.2,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        smoothWheel: true,
+        smoothTouch: false // Disable for native snappy touch feel
+    });
 
-        lenis.on('scroll', () => {
-            ScrollTrigger.update();
-        });
+    // Sync Lenis with GSAP ScrollTrigger
+    lenis.on('scroll', () => {
+        ScrollTrigger.update();
+    });
 
-        gsap.ticker.add((time) => {
-            lenis.raf(time * 1000);
-        });
-        gsap.ticker.lagSmoothing(0, 0);
-    }
+    gsap.ticker.add((time) => {
+        lenis.raf(time * 1000);
+    });
+    gsap.ticker.lagSmoothing(0, 0);
 
     // --- 3. Custom Cursor (Desktop Only) ---
     if (window.innerWidth > 1024) {
@@ -109,12 +108,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function openMenu() {
         mobileMenu.style.transform = 'translateY(0)';
-        if (lenis) lenis.stop(); // Prevent scrolling while menu is open
+        lenis.stop(); // Prevent scrolling while menu is open
     }
 
     function closeMenu() {
         mobileMenu.style.transform = 'translateY(-100%)';
-        if (lenis) lenis.start(); // Re-enable scrolling
+        lenis.start(); // Re-enable scrolling
     }
 
     mobileMenuBtn.addEventListener('click', openMenu);
@@ -126,34 +125,29 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- 5.1 Smooth Anchor Scrolling ---
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
+            e.preventDefault();
             const target = this.getAttribute('href');
-            if (lenis) {
-                e.preventDefault();
-                if (target === '#') {
-                    lenis.scrollTo(0);
-                } else {
-                    lenis.scrollTo(target, { offset: -50 });
-                }
+            if (target === '#') {
+                lenis.scrollTo(0);
+            } else {
+                lenis.scrollTo(target, { offset: -50 });
             }
-            // If no lenis (mobile), let native anchor jumping work
         });
     });
 
     // --- 6. GSAP Scroll Animations ---
 
-    // Parallax Hero Image (Desktop Only)
-    if (window.innerWidth >= 1024) {
-        gsap.to("#hero-img", {
-            yPercent: 30,
-            ease: "none",
-            scrollTrigger: {
-                trigger: "#hero",
-                start: "top top",
-                end: "bottom top",
-                scrub: true
-            }
-        });
-    }
+    // Parallax Hero Image
+    gsap.to("#hero-img", {
+        yPercent: 30,
+        ease: "none",
+        scrollTrigger: {
+            trigger: "#hero",
+            start: "top top",
+            end: "bottom top",
+            scrub: true
+        }
+    });
 
     // --- 6. Scroll Reveal Animations ---
 
