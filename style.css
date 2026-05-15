@@ -162,6 +162,19 @@ h1, h2, h3, h4, h5, h6 {
   transform: translateY(50px);
 }
 
+/* Static Interface for Mobile (Performance) */
+@media (max-width: 1024px) {
+  .gsap-fade-up, 
+  .gsap-reveal-left, 
+  .gsap-reveal-right, 
+  .gsap-zoom-in, 
+  .reveal-up {
+    opacity: 1 !important;
+    transform: none !important;
+    visibility: visible !important;
+  }
+}
+
 /* Hero Image Parallax */
 .hero-bg {
   position: absolute;

@@ -21,16 +21,19 @@ document.addEventListener('DOMContentLoaded', () => {
                     loader.style.display = 'none';
                 }
             })
-            .fromTo('.reveal-up', 
-                { y: 100, opacity: 0 }, 
-                { y: 0, opacity: 1, duration: 1.2, stagger: 0.15, ease: "power4.out", onComplete: () => ScrollTrigger.refresh() }, "-=0.6"
-            );
+    // Only run entrance animations on desktop
+    if (window.innerWidth > 1024) {
+        tlLoader.fromTo('.reveal-up', 
+            { y: 100, opacity: 0 }, 
+            { y: 0, opacity: 1, duration: 1.2, stagger: 0.15, ease: "power4.out", onComplete: () => ScrollTrigger.refresh() }, "-=0.6"
+        );
+    }
 
     // --- 2. Lenis Smooth Scrolling (Desktop Only) ---
-    const isMobile = window.innerWidth < 1024;
+    const isMobileDevice = window.innerWidth < 1024;
     let lenis;
 
-    if (!isMobile) {
+    if (!isMobileDevice) {
         lenis = new Lenis({
             duration: 1.2,
             easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -56,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- 3. Custom Cursor (Desktop Only) ---
-    if (window.innerWidth > 1024) {
+    if (!isMobileDevice) {
         const cursorDot = document.getElementById('cursor-dot');
         const cursorOutline = document.getElementById('cursor-outline');
         const hoverTargets = document.querySelectorAll('.hover-target, a, button');
@@ -118,14 +121,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function openMenu() {
         mobileMenu.style.transform = 'translateY(0)';
-        if (lenis) lenis.stop(); // Prevent scrolling while menu is open
-        document.body.style.overflow = 'hidden'; // Fallback for mobile
+        if (lenis) lenis.stop();
+        document.body.style.overflow = 'hidden';
     }
- 
+
     function closeMenu() {
         mobileMenu.style.transform = 'translateY(-100%)';
-        if (lenis) lenis.start(); // Re-enable scrolling
-        document.body.style.overflow = ''; // Restore mobile scroll
+        if (lenis) lenis.start();
+        document.body.style.overflow = '';
     }
 
     mobileMenuBtn.addEventListener('click', openMenu);
@@ -147,7 +150,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     lenis.scrollTo(target, { offset: -50 });
                 }
             } else {
-                // Fallback for mobile (native smooth scroll)
                 const targetElement = document.querySelector(target === '#' ? 'body' : target);
                 if (targetElement) {
                     targetElement.scrollIntoView({ behavior: 'smooth' });
@@ -156,95 +158,92 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // --- 6. GSAP Scroll Animations ---
-
-    // Parallax Hero Image
-    gsap.to("#hero-img", {
-        yPercent: 30,
-        ease: "none",
-        scrollTrigger: {
-            trigger: "#hero",
-            start: "top top",
-            end: "bottom top",
-            scrub: true
-        }
-    });
-
-    // --- 6. Scroll Reveal Animations ---
-    const animMobile = window.innerWidth < 1024;
-
-    // Fade Up
-    const fadeUpElements = document.querySelectorAll('.gsap-fade-up');
-    fadeUpElements.forEach(el => {
-        gsap.fromTo(el, 
-            { y: animMobile ? 20 : 60, opacity: 0 },
-            { 
-                y: 0, opacity: 1, 
-                duration: animMobile ? 0.8 : 1.2, 
-                ease: "power3.out",
-                scrollTrigger: {
-                    trigger: el,
-                    start: animMobile ? "top bottom" : "top 85%",
-                    toggleActions: "play none none none"
-                }
+    // --- 6. GSAP Scroll Animations (Desktop Only) ---
+    if (!isMobileDevice) {
+        // Parallax Hero Image
+        gsap.to("#hero-img", {
+            yPercent: 30,
+            ease: "none",
+            scrollTrigger: {
+                trigger: "#hero",
+                start: "top top",
+                end: "bottom top",
+                scrub: true
             }
-        );
-    });
+        });
 
-    // Reveal Left
-    const revealLeftElements = document.querySelectorAll('.gsap-reveal-left');
-    revealLeftElements.forEach(el => {
-        gsap.fromTo(el,
-            { x: animMobile ? -30 : -100, opacity: 0 },
-            {
-                x: 0, opacity: 1, 
-                duration: animMobile ? 1 : 1.4, 
-                ease: "power3.out",
-                scrollTrigger: {
-                    trigger: el,
-                    start: animMobile ? "top bottom" : "top 80%"
+        // Fade Up
+        const fadeUpElements = document.querySelectorAll('.gsap-fade-up');
+        fadeUpElements.forEach(el => {
+            gsap.fromTo(el, 
+                { y: 60, opacity: 0 },
+                { 
+                    y: 0, opacity: 1, 
+                    duration: 1.2, 
+                    ease: "power3.out",
+                    scrollTrigger: {
+                        trigger: el,
+                        start: "top 85%",
+                        toggleActions: "play none none none"
+                    }
                 }
-            }
-        );
-    });
+            );
+        });
 
-    // Reveal Right
-    const revealRightElements = document.querySelectorAll('.gsap-reveal-right');
-    revealRightElements.forEach(el => {
-        gsap.fromTo(el,
-            { x: animMobile ? 30 : 100, opacity: 0 },
-            {
-                x: 0, opacity: 1, 
-                duration: animMobile ? 1 : 1.4, 
-                ease: "power3.out",
-                scrollTrigger: {
-                    trigger: el,
-                    start: animMobile ? "top bottom" : "top 80%"
+        // Reveal Left
+        const revealLeftElements = document.querySelectorAll('.gsap-reveal-left');
+        revealLeftElements.forEach(el => {
+            gsap.fromTo(el,
+                { x: -100, opacity: 0 },
+                {
+                    x: 0, opacity: 1, 
+                    duration: 1.4, 
+                    ease: "power3.out",
+                    scrollTrigger: {
+                        trigger: el,
+                        start: "top 80%"
+                    }
                 }
-            }
-        );
-    });
+            );
+        });
 
-    // Zoom In
-    const zoomInElements = document.querySelectorAll('.gsap-zoom-in');
-    zoomInElements.forEach(el => {
-        gsap.fromTo(el,
-            { scale: animMobile ? 0.9 : 0.8, opacity: 0 },
-            {
-                scale: 1, opacity: 1, 
-                duration: animMobile ? 0.8 : 1.2, 
-                ease: "power3.out",
-                scrollTrigger: {
-                    trigger: el,
-                    start: animMobile ? "top bottom" : "top 80%"
+        // Reveal Right
+        const revealRightElements = document.querySelectorAll('.gsap-reveal-right');
+        revealRightElements.forEach(el => {
+            gsap.fromTo(el,
+                { x: 100, opacity: 0 },
+                {
+                    x: 0, opacity: 1, 
+                    duration: 1.4, 
+                    ease: "power3.out",
+                    scrollTrigger: {
+                        trigger: el,
+                        start: "top 80%"
+                    }
                 }
-            }
-        );
-    });
+            );
+        });
 
-    // Final refresh to ensure mobile triggers work
-    window.addEventListener('load', () => {
-        ScrollTrigger.refresh();
-    });
+        // Zoom In
+        const zoomInElements = document.querySelectorAll('.gsap-zoom-in');
+        zoomInElements.forEach(el => {
+            gsap.fromTo(el,
+                { scale: 0.8, opacity: 0 },
+                {
+                    scale: 1, opacity: 1, 
+                    duration: 1.2, 
+                    ease: "power3.out",
+                    scrollTrigger: {
+                        trigger: el,
+                        start: "top 80%"
+                    }
+                }
+            );
+        });
+
+        window.addEventListener('load', () => {
+            ScrollTrigger.refresh();
+        });
+    }
 
 });
