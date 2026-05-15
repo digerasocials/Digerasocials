@@ -21,45 +21,32 @@ document.addEventListener('DOMContentLoaded', () => {
                     loader.style.display = 'none';
                 }
             })
-    // Only run entrance animations on desktop
-    if (window.innerWidth > 1024) {
-        tlLoader.fromTo('.reveal-up', 
-            { y: 100, opacity: 0 }, 
-            { y: 0, opacity: 1, duration: 1.2, stagger: 0.15, ease: "power4.out", onComplete: () => ScrollTrigger.refresh() }, "-=0.6"
-        );
-    }
+            .fromTo('.reveal-up', 
+                { y: 100, opacity: 0 }, 
+                { y: 0, opacity: 1, duration: 1.2, stagger: 0.15, ease: "power4.out", onComplete: () => ScrollTrigger.refresh() }, "-=0.6"
+            );
 
-    // --- 2. Lenis Smooth Scrolling (Desktop Only) ---
-    const isMobileDevice = window.innerWidth < 1024;
-    let lenis;
+    // --- 2. Lenis Smooth Scrolling ---
+    const isMobile = window.innerWidth < 1024;
+    const lenis = new Lenis({
+        duration: isMobile ? 0.8 : 1.2,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        smoothWheel: true,
+        smoothTouch: false // Disable for native snappy touch feel
+    });
 
-    if (!isMobileDevice) {
-        lenis = new Lenis({
-            duration: 1.2,
-            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-            smoothWheel: true,
-            smoothTouch: false
-        });
+    // Sync Lenis with GSAP ScrollTrigger
+    lenis.on('scroll', () => {
+        ScrollTrigger.update();
+    });
 
-        // Sync Lenis with GSAP ScrollTrigger
-        lenis.on('scroll', () => {
-            ScrollTrigger.update();
-        });
-
-        gsap.ticker.add((time) => {
-            lenis.raf(time * 1000);
-        });
-        gsap.ticker.lagSmoothing(0, 0);
-
-        function raf(time) {
-            lenis.raf(time);
-            requestAnimationFrame(raf);
-        }
-        requestAnimationFrame(raf);
-    }
+    gsap.ticker.add((time) => {
+        lenis.raf(time * 1000);
+    });
+    gsap.ticker.lagSmoothing(0, 0);
 
     // --- 3. Custom Cursor (Desktop Only) ---
-    if (!isMobileDevice) {
+    if (window.innerWidth > 1024) {
         const cursorDot = document.getElementById('cursor-dot');
         const cursorOutline = document.getElementById('cursor-outline');
         const hoverTargets = document.querySelectorAll('.hover-target, a, button');
@@ -121,14 +108,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function openMenu() {
         mobileMenu.style.transform = 'translateY(0)';
-        if (lenis) lenis.stop();
-        document.body.style.overflow = 'hidden';
+        lenis.stop(); // Prevent scrolling while menu is open
     }
 
     function closeMenu() {
         mobileMenu.style.transform = 'translateY(-100%)';
-        if (lenis) lenis.start();
-        document.body.style.overflow = '';
+        lenis.start(); // Re-enable scrolling
     }
 
     mobileMenuBtn.addEventListener('click', openMenu);
@@ -142,108 +127,97 @@ document.addEventListener('DOMContentLoaded', () => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
             const target = this.getAttribute('href');
-            
-            if (lenis) {
-                if (target === '#') {
-                    lenis.scrollTo(0);
-                } else {
-                    lenis.scrollTo(target, { offset: -50 });
-                }
+            if (target === '#') {
+                lenis.scrollTo(0);
             } else {
-                const targetElement = document.querySelector(target === '#' ? 'body' : target);
-                if (targetElement) {
-                    targetElement.scrollIntoView({ behavior: 'smooth' });
-                }
+                lenis.scrollTo(target, { offset: -50 });
             }
         });
     });
 
-    // --- 6. GSAP Scroll Animations (Desktop Only) ---
-    if (!isMobileDevice) {
-        // Parallax Hero Image
-        gsap.to("#hero-img", {
-            yPercent: 30,
-            ease: "none",
-            scrollTrigger: {
-                trigger: "#hero",
-                start: "top top",
-                end: "bottom top",
-                scrub: true
+    // --- 6. GSAP Scroll Animations ---
+
+    // Parallax Hero Image
+    gsap.to("#hero-img", {
+        yPercent: 30,
+        ease: "none",
+        scrollTrigger: {
+            trigger: "#hero",
+            start: "top top",
+            end: "bottom top",
+            scrub: true
+        }
+    });
+
+    // --- 6. Scroll Reveal Animations ---
+
+    // Fade Up
+    const fadeUpElements = document.querySelectorAll('.gsap-fade-up');
+    fadeUpElements.forEach(el => {
+        gsap.fromTo(el, 
+            { y: 60, opacity: 0 },
+            { 
+                y: 0, opacity: 1, 
+                duration: 1.2, 
+                ease: "power3.out",
+                scrollTrigger: {
+                    trigger: el,
+                    start: isMobile ? "top 95%" : "top 85%",
+                    toggleActions: "play none none none"
+                }
             }
-        });
+        );
+    });
 
-        // Fade Up
-        const fadeUpElements = document.querySelectorAll('.gsap-fade-up');
-        fadeUpElements.forEach(el => {
-            gsap.fromTo(el, 
-                { y: 60, opacity: 0 },
-                { 
-                    y: 0, opacity: 1, 
-                    duration: 1.2, 
-                    ease: "power3.out",
-                    scrollTrigger: {
-                        trigger: el,
-                        start: "top 85%",
-                        toggleActions: "play none none none"
-                    }
+    // Reveal Left
+    const revealLeftElements = document.querySelectorAll('.gsap-reveal-left');
+    revealLeftElements.forEach(el => {
+        gsap.fromTo(el,
+            { x: isMobile ? -50 : -100, opacity: 0 },
+            {
+                x: 0, opacity: 1, 
+                duration: 1.4, 
+                ease: "power3.out",
+                scrollTrigger: {
+                    trigger: el,
+                    start: isMobile ? "top 95%" : "top 80%"
                 }
-            );
-        });
+            }
+        );
+    });
 
-        // Reveal Left
-        const revealLeftElements = document.querySelectorAll('.gsap-reveal-left');
-        revealLeftElements.forEach(el => {
-            gsap.fromTo(el,
-                { x: -100, opacity: 0 },
-                {
-                    x: 0, opacity: 1, 
-                    duration: 1.4, 
-                    ease: "power3.out",
-                    scrollTrigger: {
-                        trigger: el,
-                        start: "top 80%"
-                    }
+    // Reveal Right
+    const revealRightElements = document.querySelectorAll('.gsap-reveal-right');
+    revealRightElements.forEach(el => {
+        gsap.fromTo(el,
+            { x: isMobile ? 50 : 100, opacity: 0 },
+            {
+                x: 0, opacity: 1, 
+                duration: 1.4, 
+                ease: "power3.out",
+                scrollTrigger: {
+                    trigger: el,
+                    start: isMobile ? "top 95%" : "top 80%"
                 }
-            );
-        });
+            }
+        );
+    });
 
-        // Reveal Right
-        const revealRightElements = document.querySelectorAll('.gsap-reveal-right');
-        revealRightElements.forEach(el => {
-            gsap.fromTo(el,
-                { x: 100, opacity: 0 },
-                {
-                    x: 0, opacity: 1, 
-                    duration: 1.4, 
-                    ease: "power3.out",
-                    scrollTrigger: {
-                        trigger: el,
-                        start: "top 80%"
-                    }
+    // Zoom In
+    const zoomInElements = document.querySelectorAll('.gsap-zoom-in');
+    zoomInElements.forEach(el => {
+        gsap.fromTo(el,
+            { scale: 0.8, opacity: 0 },
+            {
+                scale: 1, opacity: 1, 
+                duration: 1.2, 
+                ease: "power3.out",
+                scrollTrigger: {
+                    trigger: el,
+                    start: isMobile ? "top 95%" : "top 80%"
                 }
-            );
-        });
-
-        // Zoom In
-        const zoomInElements = document.querySelectorAll('.gsap-zoom-in');
-        zoomInElements.forEach(el => {
-            gsap.fromTo(el,
-                { scale: 0.8, opacity: 0 },
-                {
-                    scale: 1, opacity: 1, 
-                    duration: 1.2, 
-                    ease: "power3.out",
-                    scrollTrigger: {
-                        trigger: el,
-                        start: "top 80%"
-                    }
-                }
-            );
-        });
-
-        window.addEventListener('load', () => {
-            ScrollTrigger.refresh();
-        });
-    }
+            }
+        );
+    });
 
 });

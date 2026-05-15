@@ -1,21 +1,22 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@300;400;500;600;700;800;900&display=swap');
 
-/* Base Styles & Reset */
-html {
-  scroll-behavior: smooth;
+/* Base Styles & Lenis Smooth Scrolling Reset */
+html, body {
+  overflow-x: hidden;
+  position: relative;
+  width: 100%;
 }
 
-html.lenis {
-  scroll-behavior: auto;
+html.lenis, html.lenis body {
+  height: auto;
 }
 
 body {
   font-family: 'Inter', sans-serif;
   background-color: #050505; /* Deep matte black */
   color: #ffffff;
-  overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  -moz-osx-osx-font-smoothing: grayscale;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -160,19 +161,6 @@ h1, h2, h3, h4, h5, h6 {
 .reveal-up {
   opacity: 0;
   transform: translateY(50px);
-}
-
-/* Static Interface for Mobile (Performance) */
-@media (max-width: 1024px) {
-  .gsap-fade-up, 
-  .gsap-reveal-left, 
-  .gsap-reveal-right, 
-  .gsap-zoom-in, 
-  .reveal-up {
-    opacity: 1 !important;
-    transform: none !important;
-    visibility: visible !important;
-  }
 }
 
 /* Hero Image Parallax */
