@@ -26,24 +26,34 @@ document.addEventListener('DOMContentLoaded', () => {
                 { y: 0, opacity: 1, duration: 1.2, stagger: 0.15, ease: "power4.out", onComplete: () => ScrollTrigger.refresh() }, "-=0.6"
             );
 
-    // --- 2. Lenis Smooth Scrolling ---
+    // --- 2. Lenis Smooth Scrolling (Desktop Only) ---
     const isMobile = window.innerWidth < 1024;
-    const lenis = new Lenis({
-        duration: isMobile ? 0.8 : 1.2,
-        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-        smoothWheel: true,
-        smoothTouch: false // Disable for native snappy touch feel
-    });
+    let lenis;
 
-    // Sync Lenis with GSAP ScrollTrigger
-    lenis.on('scroll', () => {
-        ScrollTrigger.update();
-    });
+    if (!isMobile) {
+        lenis = new Lenis({
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            smoothWheel: true,
+            smoothTouch: false
+        });
 
-    gsap.ticker.add((time) => {
-        lenis.raf(time * 1000);
-    });
-    gsap.ticker.lagSmoothing(0, 0);
+        // Sync Lenis with GSAP ScrollTrigger
+        lenis.on('scroll', () => {
+            ScrollTrigger.update();
+        });
+
+        gsap.ticker.add((time) => {
+            lenis.raf(time * 1000);
+        });
+        gsap.ticker.lagSmoothing(0, 0);
+
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+    }
 
     // --- 3. Custom Cursor (Desktop Only) ---
     if (window.innerWidth > 1024) {
@@ -108,12 +118,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function openMenu() {
         mobileMenu.style.transform = 'translateY(0)';
-        lenis.stop(); // Prevent scrolling while menu is open
+        if (lenis) lenis.stop(); // Prevent scrolling while menu is open
+        document.body.style.overflow = 'hidden'; // Fallback for mobile
     }
-
+ 
     function closeMenu() {
         mobileMenu.style.transform = 'translateY(-100%)';
-        lenis.start(); // Re-enable scrolling
+        if (lenis) lenis.start(); // Re-enable scrolling
+        document.body.style.overflow = ''; // Restore mobile scroll
     }
 
     mobileMenuBtn.addEventListener('click', openMenu);
@@ -127,10 +139,19 @@ document.addEventListener('DOMContentLoaded', () => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
             const target = this.getAttribute('href');
-            if (target === '#') {
-                lenis.scrollTo(0);
+            
+            if (lenis) {
+                if (target === '#') {
+                    lenis.scrollTo(0);
+                } else {
+                    lenis.scrollTo(target, { offset: -50 });
+                }
             } else {
-                lenis.scrollTo(target, { offset: -50 });
+                // Fallback for mobile (native smooth scroll)
+                const targetElement = document.querySelector(target === '#' ? 'body' : target);
+                if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: 'smooth' });
+                }
             }
         });
     });
