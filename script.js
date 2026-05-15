@@ -171,19 +171,20 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // --- 6. Scroll Reveal Animations ---
+    const animMobile = window.innerWidth < 1024;
 
     // Fade Up
     const fadeUpElements = document.querySelectorAll('.gsap-fade-up');
     fadeUpElements.forEach(el => {
         gsap.fromTo(el, 
-            { y: 60, opacity: 0 },
+            { y: animMobile ? 20 : 60, opacity: 0 },
             { 
                 y: 0, opacity: 1, 
-                duration: 1.2, 
+                duration: animMobile ? 0.8 : 1.2, 
                 ease: "power3.out",
                 scrollTrigger: {
                     trigger: el,
-                    start: isMobile ? "top 95%" : "top 85%",
+                    start: animMobile ? "top bottom" : "top 85%",
                     toggleActions: "play none none none"
                 }
             }
@@ -194,14 +195,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const revealLeftElements = document.querySelectorAll('.gsap-reveal-left');
     revealLeftElements.forEach(el => {
         gsap.fromTo(el,
-            { x: isMobile ? -50 : -100, opacity: 0 },
+            { x: animMobile ? -30 : -100, opacity: 0 },
             {
                 x: 0, opacity: 1, 
-                duration: 1.4, 
+                duration: animMobile ? 1 : 1.4, 
                 ease: "power3.out",
                 scrollTrigger: {
                     trigger: el,
-                    start: isMobile ? "top 95%" : "top 80%"
+                    start: animMobile ? "top bottom" : "top 80%"
                 }
             }
         );
@@ -211,14 +212,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const revealRightElements = document.querySelectorAll('.gsap-reveal-right');
     revealRightElements.forEach(el => {
         gsap.fromTo(el,
-            { x: isMobile ? 50 : 100, opacity: 0 },
+            { x: animMobile ? 30 : 100, opacity: 0 },
             {
                 x: 0, opacity: 1, 
-                duration: 1.4, 
+                duration: animMobile ? 1 : 1.4, 
                 ease: "power3.out",
                 scrollTrigger: {
                     trigger: el,
-                    start: isMobile ? "top 95%" : "top 80%"
+                    start: animMobile ? "top bottom" : "top 80%"
                 }
             }
         );
@@ -228,17 +229,22 @@ document.addEventListener('DOMContentLoaded', () => {
     const zoomInElements = document.querySelectorAll('.gsap-zoom-in');
     zoomInElements.forEach(el => {
         gsap.fromTo(el,
-            { scale: 0.8, opacity: 0 },
+            { scale: animMobile ? 0.9 : 0.8, opacity: 0 },
             {
                 scale: 1, opacity: 1, 
-                duration: 1.2, 
+                duration: animMobile ? 0.8 : 1.2, 
                 ease: "power3.out",
                 scrollTrigger: {
                     trigger: el,
-                    start: isMobile ? "top 95%" : "top 80%"
+                    start: animMobile ? "top bottom" : "top 80%"
                 }
             }
         );
+    });
+
+    // Final refresh to ensure mobile triggers work
+    window.addEventListener('load', () => {
+        ScrollTrigger.refresh();
     });
 
 });
