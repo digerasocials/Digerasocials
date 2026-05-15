@@ -5,6 +5,9 @@ html, body {
   overflow-x: hidden;
   position: relative;
   width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 html.lenis, html.lenis body {
@@ -234,14 +237,15 @@ h1, h2, h3, h4, h5, h6 {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   background: #050505;
   z-index: 10000;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  overflow: hidden;
 }
 
 .loader-text {

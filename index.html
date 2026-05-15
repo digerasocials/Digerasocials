@@ -55,10 +55,12 @@
         </div>
     </div>
 
-    <!-- Background Blobs -->
-    <div class="blob blob-purple top-[-10%] left-[-10%]"></div>
-    <div class="blob blob-blue top-[40%] right-[-10%]"></div>
-    <div class="blob blob-purple bottom-[-10%] left-[20%]"></div>
+    <!-- Background Blobs (Wrapped to prevent overflow) -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none z-[-3]">
+        <div class="blob blob-purple top-[-10%] left-[-10%]"></div>
+        <div class="blob blob-blue top-[40%] right-[-10%]"></div>
+        <div class="blob blob-purple bottom-[-10%] left-[20%]"></div>
+    </div>
 
     <!-- Navbar -->
     <nav class="fixed w-full z-50 top-0 transition-all duration-300 glass" id="navbar">
@@ -122,7 +124,7 @@
                     <span class="text-xs font-medium tracking-wide uppercase">Accepting New Projects</span>
                 </div>
                 
-                <h1 class="text-5xl md:text-7xl lg:text-8xl font-heading font-black leading-[1.1] mb-6 tracking-tight reveal-up">
+                <h1 class="text-4xl md:text-7xl lg:text-8xl font-heading font-black leading-[1.1] mb-6 tracking-tight reveal-up">
                     Building Digital <br />
                     <span class="text-gradient italic pr-2">Experiences</span> That <br />
                     Grow Brands
