@@ -141,17 +141,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- 6. GSAP Scroll Animations ---
 
-    // Parallax Hero Image
-    gsap.to("#hero-img", {
-        yPercent: 30,
-        ease: "none",
-        scrollTrigger: {
-            trigger: "#hero",
-            start: "top top",
-            end: "bottom top",
-            scrub: true
-        }
-    });
+    // Parallax Hero Image (Desktop Only)
+    if (window.innerWidth >= 1024) {
+        gsap.to("#hero-img", {
+            yPercent: 30,
+            ease: "none",
+            scrollTrigger: {
+                trigger: "#hero",
+                start: "top top",
+                end: "bottom top",
+                scrub: true
+            }
+        });
+    }
 
     // --- 6. Scroll Reveal Animations ---
 
