@@ -1,515 +1,146 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-B90L4ZWGRH"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-B90L4ZWGRH');
-    </script>
-
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Digera Socials | Premium Digital Agency</title>
-    
-    <!-- Meta Descriptions for SEO -->
-    <meta name="description" content="Digera Socials is a creative digital agency specializing in web development, AI solutions, branding, and social media growth for businesses.">
-    <meta name="keywords" content="digital agency, web development, AI chatbots, social media growth, branding, SEO">
-    
-    <!-- Tailwind CSS (CDN) -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Tailwind Configuration -->
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        brand: {
-                            black: '#050505',
-                            charcoal: '#171717',
-                            blue: '#3b82f6',
-                            purple: '#9333ea',
-                            muted: '#a3a3a3'
-                        }
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        heading: ['Outfit', 'sans-serif']
-                    }
-                }
-            }
-        }
-    </script>
-    
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="style.css">
-    
-    <!-- Phosphor Icons (Modern Alternative to FontAwesome) -->
-    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Creative Studio — Minimalist Architecture & Interior Design</title>
+  <meta name="description" content="A highly sophisticated, minimalist architecture and interior design studio specializing in bespoke residential and commercial forms.">
+  
+  <!-- SEO Heading Structure / Styling Links -->
+  <link rel="stylesheet" href="css/main.css">
 </head>
-<body class="bg-brand-black text-white selection:bg-brand-purple selection:text-white overflow-x-hidden">
-
-    <!-- Custom Cursor (Hidden on Mobile via CSS) -->
-    <div class="cursor-dot" id="cursor-dot"></div>
-    <div class="cursor-outline" id="cursor-outline"></div>
-
-    <!-- Initial Loader -->
-    <div id="loader">
-        <div class="loader-text">DIGERA</div>
-        <div class="loader-progress">
-            <div class="loader-bar" id="loader-bar"></div>
-        </div>
-    </div>
-
-    <!-- Background Blobs (Wrapped to prevent overflow) -->
-    <div class="fixed inset-0 overflow-hidden pointer-events-none z-[-3]">
-        <div class="blob blob-purple top-[-10%] left-[-10%]"></div>
-        <div class="blob blob-blue top-[40%] right-[-10%]"></div>
-        <div class="blob blob-purple bottom-[-10%] left-[20%]"></div>
-    </div>
-
-    <!-- Navbar -->
-    <nav class="fixed w-full z-50 top-0 transition-all duration-300 glass" id="navbar">
-        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" class="text-2xl font-heading font-bold tracking-wider flex items-center gap-2 group">
-                <i class="ph-fill ph-planet text-brand-purple group-hover:rotate-90 transition-transform duration-500"></i>
-                DIGERA<span class="text-brand-blue">.</span>
-            </a>
-            
-            <!-- Desktop Menu -->
-            <div class="hidden md:flex gap-8 items-center font-medium text-sm text-brand-muted">
-                <a href="#about" class="hover:text-white transition-colors hover-target">About</a>
-                <a href="#services" class="hover:text-white transition-colors hover-target">Services</a>
-                <a href="#work" class="hover:text-white transition-colors hover-target">Work</a>
-                <a href="#process" class="hover:text-white transition-colors hover-target">Process</a>
-                <a href="#contact" class="btn-premium px-5 py-2.5 rounded-full bg-white text-black hover:text-white hover:bg-transparent border border-transparent hover:border-brand-purple font-semibold transition-all hover-target">Let's Talk</a>
-            </div>
-
-            <!-- Mobile Menu Button -->
-            <button class="md:hidden text-white hover-target" id="mobile-menu-btn">
-                <i class="ph ph-list text-3xl"></i>
-            </button>
-        </div>
-    </nav>
-
-    <!-- Mobile Menu Overlay -->
-    <div id="mobile-menu" class="fixed inset-0 bg-brand-black z-[60] flex flex-col justify-center items-center text-center p-6 translate-y-[-100%] transition-transform duration-500 ease-in-out">
-        <button id="close-menu-btn" class="absolute top-8 right-8 text-white text-4xl">
-            <i class="ph ph-x"></i>
-        </button>
-        <div class="flex flex-col items-center gap-8">
-            <a href="#about" class="mobile-link text-3xl font-heading font-bold text-white hover:text-brand-purple transition-all duration-300">About</a>
-            <a href="#services" class="mobile-link text-3xl font-heading font-bold text-white hover:text-brand-purple transition-all duration-300">Services</a>
-            <a href="#work" class="mobile-link text-3xl font-heading font-bold text-white hover:text-brand-purple transition-all duration-300">Work</a>
-            <a href="#process" class="mobile-link text-3xl font-heading font-bold text-white hover:text-brand-purple transition-all duration-300">Process</a>
-            
-            <div class="mt-12 flex flex-col items-center gap-6 border-t border-white/10 pt-10 w-full max-w-[250px]">
-                <a href="mailto:digerasocials@gmail.com" class="text-brand-muted hover:text-white transition-colors flex items-center gap-3">
-                    <i class="ph ph-envelope-simple text-xl"></i> Email
-                </a>
-                <a href="tel:+919544120915" class="text-brand-muted hover:text-white transition-colors flex items-center gap-3">
-                    <i class="ph ph-phone text-xl"></i> Call Us
-                </a>
-            </div>
-            
-            <a href="#contact" class="mobile-link text-2xl font-heading font-bold text-brand-blue border-b-2 border-brand-blue pb-2 mt-4 inline-block">Start a Project</a>
-        </div>
-    </div>
-
-    <!-- Main Content wrapper for Lenis -->
-    <main id="main-content">
-        
-        <!-- Hero Section -->
-        <section id="hero" class="relative h-screen flex items-center justify-center overflow-hidden">
-            <img src="assets/hero_bg.png" alt="Digital Agency Background" class="hero-bg" id="hero-img">
-            <div class="hero-overlay"></div>
-            
-            <div class="relative z-10 text-center px-6 max-w-5xl mx-auto flex flex-col items-center mt-16">
-                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass border border-white/10 mb-6 reveal-up">
-                    <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
-                    <span class="text-xs font-medium tracking-wide uppercase">Accepting New Projects</span>
-                </div>
-                
-                <h1 class="text-4xl md:text-7xl lg:text-8xl font-heading font-black leading-[1.1] mb-6 tracking-tight reveal-up">
-                    Building Digital <br />
-                    <span class="text-gradient italic pr-2">Experiences</span> That <br />
-                    Grow Brands
-                </h1>
-                
-                <p class="text-lg md:text-xl text-brand-muted max-w-2xl mx-auto mb-10 reveal-up">
-                    Websites, AI Solutions & Social Media Growth for Modern Businesses. We combine technology and creativity to scale your digital presence.
-                </p>
-                
-                <div class="flex flex-col sm:flex-row gap-4 reveal-up">
-                    <a href="#work" class="btn-premium px-8 py-4 rounded-full bg-white text-black font-semibold hover-target flex items-center justify-center gap-2">
-                        View Our Work <i class="ph ph-arrow-right"></i>
-                    </a>
-                    <a href="#contact" class="px-8 py-4 rounded-full glass text-white font-semibold border border-white/20 hover:border-brand-purple transition-colors hover-target flex items-center justify-center">
-                        Get Started
-                    </a>
-                </div>
-            </div>
-            
-        </section>
-
-        <!-- About Section -->
-        <section id="about" class="py-24 md:py-32 relative">
-            <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
-                <div class="gsap-reveal-left">
-                    <h2 class="text-sm font-bold tracking-widest text-brand-blue uppercase mb-4">Who We Are</h2>
-                    <h3 class="text-4xl md:text-5xl font-heading font-bold leading-tight mb-6">
-                        We don't just build websites. <br>We build <span class="text-brand-purple">businesses</span>.
-                    </h3>
-                    <p class="text-brand-muted text-lg mb-6 leading-relaxed">
-                        Digera Socials is a premium creative digital agency dedicated to helping ambitious brands, enterprises, and startups dominate their digital space.
-                    </p>
-                    <p class="text-brand-muted text-lg mb-8 leading-relaxed">
-                        By merging stunning, futuristic design with powerful AI integrations and strategic marketing, we ensure your brand not only looks exceptional but converts flawlessly.
-                    </p>
-                    <div class="grid grid-cols-2 gap-8 border-t border-white/10 pt-8">
-                        <div>
-                            <div class="text-4xl font-heading font-bold text-white mb-1">10+</div>
-                            <div class="text-sm text-brand-muted">Projects Completed</div>
-                        </div>
-                        <div>
-                            <div class="text-4xl font-heading font-bold text-white mb-1">100%</div>
-                            <div class="text-sm text-brand-muted">Premium Delivery</div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="relative gsap-reveal-right h-[500px] rounded-2xl overflow-hidden glass-card group">
-                    <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?q=80&w=2070&auto=format&fit=crop" alt="Agency Team" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-70">
-                    <div class="absolute inset-0 bg-gradient-to-t from-brand-black via-transparent to-transparent"></div>
-                    <div class="absolute bottom-6 left-6 right-6">
-                        <div class="glass p-4 rounded-xl inline-flex items-center gap-4">
-                            <div class="w-12 h-12 rounded-full bg-brand-blue/20 flex items-center justify-center text-brand-blue">
-                                <i class="ph ph-lightbulb text-2xl"></i>
-                            </div>
-                            <div>
-                                <div class="font-bold">Creative Strategy</div>
-                                <div class="text-xs text-brand-muted">Tailored for your success</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Services Section -->
-        <section id="services" class="py-24 md:py-32 relative bg-brand-charcoal/30 border-y border-white/5">
-            <div class="max-w-7xl mx-auto px-6">
-                <div class="text-center mb-20 gsap-fade-up">
-                    <h2 class="text-sm font-bold tracking-widest text-brand-purple uppercase mb-4">Our Expertise</h2>
-                    <h3 class="text-4xl md:text-6xl font-heading font-bold">Premium Digital <span class="italic text-brand-blue">Services</span></h3>
-                </div>
-                
-                <div class="grid grid-cols-2 lg:grid-cols-3 gap-3 md:gap-6">
-                    <!-- Service 1 -->
-                    <div class="glass-card p-4 md:p-8 rounded-xl md:rounded-2xl hover-target gsap-fade-up group">
-                        <i class="ph ph-browsers text-2xl md:text-4xl text-brand-blue mb-4 md:mb-6 group-hover:scale-110 transition-transform"></i>
-                        <h4 class="text-lg md:text-2xl font-heading font-bold mb-2 group-hover:text-brand-purple transition-colors">Web Development</h4>
-                        <p class="text-brand-muted text-[10px] md:text-sm leading-relaxed mb-4 hidden md:block">Mobile-first, fast-loading, and visually stunning websites. Modern UI/UX designed to convert.</p>
-                        <ul class="text-[10px] md:text-xs text-brand-muted/80 space-y-1">
-                            <li><i class="ph ph-check text-brand-blue mr-1"></i>Websites</li>
-                            <li class="hidden md:block"><i class="ph ph-check text-brand-blue mr-1"></i>Landing Pages</li>
-                        </ul>
-                    </div>
-                    
-                    <!-- Service 2 -->
-                    <div class="glass-card p-4 md:p-8 rounded-xl md:rounded-2xl hover-target gsap-fade-up group">
-                        <i class="ph ph-robot text-2xl md:text-4xl text-brand-purple mb-4 md:mb-6 group-hover:scale-110 transition-transform"></i>
-                        <h4 class="text-lg md:text-2xl font-heading font-bold mb-2 group-hover:text-brand-blue transition-colors">AI Chatbots</h4>
-                        <p class="text-brand-muted text-[10px] md:text-sm leading-relaxed mb-4 hidden md:block">Automate customer support, bookings, and lead generation with AI assistants.</p>
-                        <ul class="text-[10px] md:text-xs text-brand-muted/80 space-y-1">
-                            <li><i class="ph ph-check text-brand-purple mr-1"></i>WhatsApp AI</li>
-                            <li class="hidden md:block"><i class="ph ph-check text-brand-purple mr-1"></i>Booking Bots</li>
-                        </ul>
-                    </div>
-                    
-                    <!-- Service 3 -->
-                    <div class="glass-card p-4 md:p-8 rounded-xl md:rounded-2xl hover-target gsap-fade-up group">
-                        <i class="ph ph-instagram-logo text-2xl md:text-4xl text-pink-500 mb-4 md:mb-6 group-hover:scale-110 transition-transform"></i>
-                        <h4 class="text-lg md:text-2xl font-heading font-bold mb-2 group-hover:text-pink-500 transition-colors">Social Media</h4>
-                        <p class="text-brand-muted text-[10px] md:text-sm leading-relaxed mb-4 hidden md:block">Strategic Instagram growth, highly engaging reel creation, and page management.</p>
-                        <ul class="text-[10px] md:text-xs text-brand-muted/80 space-y-1">
-                            <li><i class="ph ph-check text-pink-500 mr-1"></i>Insta Growth</li>
-                            <li class="hidden md:block"><i class="ph ph-check text-pink-500 mr-1"></i>Reel Creation</li>
-                        </ul>
-                    </div>
-                    
-                    <!-- Service 4 -->
-                    <div class="glass-card p-4 md:p-8 rounded-xl md:rounded-2xl hover-target gsap-fade-up group">
-                        <i class="ph ph-paint-brush-broad text-2xl md:text-4xl text-yellow-500 mb-4 md:mb-6 group-hover:scale-110 transition-transform"></i>
-                        <h4 class="text-lg md:text-2xl font-heading font-bold mb-2 group-hover:text-yellow-500 transition-colors">Branding</h4>
-                        <p class="text-brand-muted text-[10px] md:text-sm leading-relaxed mb-4 hidden md:block">Crafting memorable brand identities, logo design, and visual elements.</p>
-                        <ul class="text-[10px] md:text-xs text-brand-muted/80 space-y-1">
-                            <li><i class="ph ph-check text-yellow-500 mr-1"></i>Logo Design</li>
-                            <li class="hidden md:block"><i class="ph ph-check text-yellow-500 mr-1"></i>Brand Identity</li>
-                        </ul>
-                    </div>
-
-                    <!-- Service 5 -->
-                    <div class="glass-card p-4 md:p-8 rounded-xl md:rounded-2xl hover-target gsap-fade-up group">
-                        <i class="ph ph-trend-up text-2xl md:text-4xl text-green-500 mb-4 md:mb-6 group-hover:scale-110 transition-transform"></i>
-                        <h4 class="text-lg md:text-2xl font-heading font-bold mb-2 group-hover:text-green-500 transition-colors">SEO Growth</h4>
-                        <p class="text-brand-muted text-[10px] md:text-sm leading-relaxed mb-4 hidden md:block">Dominate local searches with Google Business optimization and performance.</p>
-                        <ul class="text-[10px] md:text-xs text-brand-muted/80 space-y-1">
-                            <li><i class="ph ph-check text-green-500 mr-1"></i>Local SEO</li>
-                            <li class="hidden md:block"><i class="ph ph-check text-green-500 mr-1"></i>Google My Biz</li>
-                        </ul>
-                    </div>
-
-                    <!-- Service 6 -->
-                    <div class="glass-card p-4 md:p-8 rounded-xl md:rounded-2xl hover-target gsap-fade-up group">
-                        <i class="ph ph-camera text-2xl md:text-4xl text-red-500 mb-4 md:mb-6 group-hover:scale-110 transition-transform"></i>
-                        <h4 class="text-lg md:text-2xl font-heading font-bold mb-2 group-hover:text-red-500 transition-colors">Content</h4>
-                        <p class="text-brand-muted text-[10px] md:text-sm leading-relaxed mb-4 hidden md:block">High-end promotional videos, photography, and ad creatives designed to capture attention.</p>
-                        <ul class="text-[10px] md:text-xs text-brand-muted/80 space-y-1">
-                            <li><i class="ph ph-check text-red-500 mr-1"></i>Video/Photo</li>
-                            <li class="hidden md:block"><i class="ph ph-check text-red-500 mr-1"></i>Ad Creatives</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Marquee Divider -->
-        <div class="py-6 border-y border-white/5 bg-brand-blue/5 overflow-hidden flex items-center">
-            <div class="marquee-container w-full">
-                <div class="marquee-content flex gap-12 text-xl font-heading font-bold uppercase tracking-widest text-brand-muted/50">
-                    <span>Web Development</span> <i class="ph-fill ph-star text-brand-purple"></i>
-                    <span>AI Automation</span> <i class="ph-fill ph-star text-brand-purple"></i>
-                    <span>Social Media</span> <i class="ph-fill ph-star text-brand-purple"></i>
-                    <span>Brand Identity</span> <i class="ph-fill ph-star text-brand-purple"></i>
-                    <span>SEO Growth</span> <i class="ph-fill ph-star text-brand-purple"></i>
-                    <!-- Repeat for seamless loop -->
-                    <span>Web Development</span> <i class="ph-fill ph-star text-brand-purple"></i>
-                    <span>AI Automation</span> <i class="ph-fill ph-star text-brand-purple"></i>
-                    <span>Social Media</span> <i class="ph-fill ph-star text-brand-purple"></i>
-                    <span>Brand Identity</span> <i class="ph-fill ph-star text-brand-purple"></i>
-                    <span>SEO Growth</span> <i class="ph-fill ph-star text-brand-purple"></i>
-                </div>
-            </div>
-        </div>
-
-        <!-- Featured Projects -->
-        <section id="work" class="py-24 md:py-32 relative">
-            <div class="max-w-7xl mx-auto px-6">
-                <div class="mb-12 md:mb-16 gsap-fade-up text-center">
-                    <h3 class="text-3xl md:text-5xl font-heading font-bold">Featured <span class="text-gradient">Projects</span></h3>
-                </div>
-
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Project 1: Jwels -->
-                    <a href="https://digerasocials.github.io/jwels/" target="_blank" class="group cursor-pointer hover-target gsap-fade-up block">
-                        <div class="relative h-[250px] md:h-[400px] rounded-2xl overflow-hidden mb-6">
-                            <div class="absolute inset-0 bg-brand-purple/20 group-hover:opacity-0 transition-opacity z-10 mix-blend-overlay"></div>
-                            <img src="assets/jwels_premium.png" alt="Jwels - Premium Jewelry E-commerce" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
-                        </div>
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <h4 class="text-2xl font-heading font-bold mb-2 group-hover:text-brand-purple transition-colors">Jwels</h4>
-                                <p class="text-brand-muted text-sm">Premium Jewelry Boutique</p>
-                            </div>
-                        </div>
-                    </a>
-
-                    <!-- Project 2: Malabar Biriyani -->
-                    <a href="https://digerasocials.github.io/Mlabar-biriyani/" target="_blank" class="group cursor-pointer hover-target gsap-fade-up md:mt-12 block">
-                        <div class="relative h-[250px] md:h-[400px] rounded-2xl overflow-hidden mb-6">
-                            <div class="absolute inset-0 bg-brand-blue/20 group-hover:opacity-0 transition-opacity z-10 mix-blend-overlay"></div>
-                            <img src="assets/malabar_premium.png" alt="Malabar Biriyani Website" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
-                        </div>
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <h4 class="text-2xl font-heading font-bold mb-2 group-hover:text-brand-blue transition-colors">Malabar Biriyani</h4>
-                                <p class="text-brand-muted text-sm">Premium Restaurant Experience</p>
-                            </div>
-                        </div>
-                    </a>
-
-                    <!-- Project 3: Smokehut -->
-                    <a href="https://digerasocials.github.io/Smokehut/" target="_blank" class="group cursor-pointer hover-target gsap-fade-up md:mt-24 block">
-                        <div class="relative h-[250px] md:h-[400px] rounded-2xl overflow-hidden mb-6">
-                            <div class="absolute inset-0 bg-brand-purple/20 group-hover:opacity-0 transition-opacity z-10 mix-blend-overlay"></div>
-                            <img src="assets/smokehut_premium.png" alt="Smokehut Restaurant Website" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
-                        </div>
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <h4 class="text-2xl font-heading font-bold mb-2 group-hover:text-brand-purple transition-colors">Smokehut</h4>
-                                <p class="text-brand-muted text-sm">Charcoal Grills & Burger Bar</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Process Section -->
-        <section id="process" class="py-24 md:py-32 relative bg-brand-charcoal/30 border-y border-white/5">
-            <div class="max-w-7xl mx-auto px-6">
-                <div class="text-center mb-20 gsap-fade-up">
-                    <h2 class="text-sm font-bold tracking-widest text-brand-purple uppercase mb-4">How We Work</h2>
-                    <h3 class="text-4xl md:text-5xl font-heading font-bold">Our <span class="italic text-brand-blue">Workflow</span></h3>
-                </div>
-
-                <div class="relative max-w-4xl mx-auto">
-                    <!-- Connecting Line -->
-                    <div class="absolute left-[28px] md:left-1/2 top-0 bottom-0 w-[2px] bg-white/10 md:-translate-x-1/2"></div>
-                    
-                    <div class="space-y-16">
-                        <!-- Step 1 -->
-                        <div class="relative flex flex-col md:flex-row items-start md:items-center justify-between group gsap-fade-up">
-                            <div class="md:w-[45%] md:text-right pl-16 md:pl-0">
-                                <h4 class="text-2xl font-heading font-bold text-brand-blue mb-2">Discovery</h4>
-                                <p class="text-brand-muted text-sm">We analyze your brand, goals, and competitors to formulate a winning digital strategy.</p>
-                            </div>
-                            <div class="absolute left-0 md:left-1/2 w-14 h-14 rounded-full bg-brand-black border-4 border-brand-charcoal flex items-center justify-center text-xl font-bold z-10 md:-translate-x-1/2 group-hover:border-brand-blue group-hover:text-brand-blue transition-colors">1</div>
-                            <div class="md:w-[45%] hidden md:block"></div>
-                        </div>
-
-                        <!-- Step 2 -->
-                        <div class="relative flex flex-col md:flex-row-reverse items-start md:items-center justify-between group gsap-fade-up">
-                            <div class="md:w-[45%] pl-16 md:pl-0">
-                                <h4 class="text-2xl font-heading font-bold text-brand-purple mb-2">Design</h4>
-                                <p class="text-brand-muted text-sm">Crafting wireframes, UI layouts, and branding elements with a premium, modern aesthetic.</p>
-                            </div>
-                            <div class="absolute left-0 md:left-1/2 w-14 h-14 rounded-full bg-brand-black border-4 border-brand-charcoal flex items-center justify-center text-xl font-bold z-10 md:-translate-x-1/2 group-hover:border-brand-purple group-hover:text-brand-purple transition-colors">2</div>
-                            <div class="md:w-[45%] hidden md:block"></div>
-                        </div>
-
-                        <!-- Step 3 -->
-                        <div class="relative flex flex-col md:flex-row items-start md:items-center justify-between group gsap-fade-up">
-                            <div class="md:w-[45%] md:text-right pl-16 md:pl-0">
-                                <h4 class="text-2xl font-heading font-bold text-brand-blue mb-2">Development</h4>
-                                <p class="text-brand-muted text-sm">Building fast, responsive, and highly interactive solutions with cutting-edge tech.</p>
-                            </div>
-                            <div class="absolute left-0 md:left-1/2 w-14 h-14 rounded-full bg-brand-black border-4 border-brand-charcoal flex items-center justify-center text-xl font-bold z-10 md:-translate-x-1/2 group-hover:border-brand-blue group-hover:text-brand-blue transition-colors">3</div>
-                            <div class="md:w-[45%] hidden md:block"></div>
-                        </div>
-
-                        <!-- Step 4 -->
-                        <div class="relative flex flex-col md:flex-row-reverse items-start md:items-center justify-between group gsap-fade-up">
-                            <div class="md:w-[45%] pl-16 md:pl-0">
-                                <h4 class="text-2xl font-heading font-bold text-brand-purple mb-2">Launch & Growth</h4>
-                                <p class="text-brand-muted text-sm">Deploying the project and executing SEO & social media strategies to drive traffic and scale.</p>
-                            </div>
-                            <div class="absolute left-0 md:left-1/2 w-14 h-14 rounded-full bg-brand-black border-4 border-brand-charcoal flex items-center justify-center text-xl font-bold z-10 md:-translate-x-1/2 group-hover:border-brand-purple group-hover:text-brand-purple transition-colors">4</div>
-                            <div class="md:w-[45%] hidden md:block"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- CTA Section -->
-        <section id="cta" class="py-32 relative overflow-hidden flex items-center justify-center text-center">
-            <div class="absolute inset-0 bg-gradient-to-b from-transparent to-brand-blue/10"></div>
-            
-            <div class="relative z-10 px-6 max-w-4xl mx-auto gsap-zoom-in">
-                <h2 class="text-5xl md:text-7xl font-heading font-black mb-8 leading-tight">
-                    Let’s Build Your Brand <br><span class="text-gradient">Digitally.</span>
-                </h2>
-                <p class="text-xl text-brand-muted mb-12 max-w-2xl mx-auto">
-                    Ready to transform your business? Get a premium website, AI automation, and social growth strategy tailored for you.
-                </p>
-                <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
-                    <a href="#contact" class="btn-premium px-10 py-5 rounded-full bg-white text-black font-bold text-lg hover-target flex items-center gap-2">
-                        Contact Us <i class="ph-bold ph-arrow-right"></i>
-                    </a>
-                    <a href="https://wa.me/919544120915" target="_blank" class="px-10 py-5 rounded-full glass text-green-400 font-bold border border-green-400/30 hover:bg-green-400/10 transition-colors hover-target flex items-center gap-2">
-                        <i class="ph-fill ph-whatsapp-logo text-2xl"></i> WhatsApp Us
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Footer / Contact -->
-        <footer id="contact" class="pt-24 pb-12 bg-black border-t border-white/10 relative">
-            <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 mb-20">
-                
-                <!-- Contact Info -->
-                <div>
-                    <a href="#" class="text-3xl font-heading font-bold tracking-wider flex items-center gap-2 mb-8">
-                        <i class="ph-fill ph-planet text-brand-purple"></i>
-                        DIGERA<span class="text-brand-blue">.</span>
-                    </a>
-                    <p class="text-brand-muted max-w-md mb-10 leading-relaxed">
-                        A premium digital agency specializing in crafting future-proof digital experiences for ambitious brands.
-                    </p>
-                    
-                    <div class="space-y-6 text-brand-muted">
-                        <a href="mailto:digerasocials@gmail.com" class="flex items-center gap-4 hover:text-white transition-colors w-fit hover-target">
-                            <div class="w-12 h-12 rounded-full glass flex items-center justify-center text-white"><i class="ph ph-envelope-simple text-xl"></i></div>
-                            digerasocials@gmail.com
-                        </a>
-                        <a href="tel:+919544120915" class="flex items-center gap-4 hover:text-white transition-colors w-fit hover-target">
-                            <div class="w-12 h-12 rounded-full glass flex items-center justify-center text-white"><i class="ph ph-phone text-xl"></i></div>
-                            +91 9544120915
-                        </a>
-                        <div class="flex items-center gap-4 w-fit">
-                            <div class="w-12 h-12 rounded-full glass flex items-center justify-center text-white"><i class="ph ph-map-pin text-xl"></i></div>
-                            Global / Remote
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Contact Form -->
-                <div class="glass-card p-8 rounded-2xl">
-                    <h3 class="text-2xl font-heading font-bold mb-6">Send an Inquiry</h3>
-                    <form action="https://formspree.io/f/mojrooyl" method="POST" class="space-y-4" id="contact-form">
-                        <div class="grid grid-cols-2 gap-4">
-                            <div>
-                                <label class="block text-xs text-brand-muted mb-2 uppercase tracking-wider">Name</label>
-                                <input type="text" name="name" required class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-brand-purple transition-colors" placeholder="John Doe">
-                            </div>
-                            <div>
-                                <label class="block text-xs text-brand-muted mb-2 uppercase tracking-wider">Email</label>
-                                <input type="email" name="email" required class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-brand-purple transition-colors" placeholder="john@example.com">
-                            </div>
-                        </div>
-                        <div>
-                            <label class="block text-xs text-brand-muted mb-2 uppercase tracking-wider">Service Needed</label>
-                            <select name="service" class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-brand-purple transition-colors appearance-none">
-                                <option class="bg-brand-charcoal">Web Development</option>
-                                <option class="bg-brand-charcoal">AI Chatbots</option>
-                                <option class="bg-brand-charcoal">Social Media</option>
-                                <option class="bg-brand-charcoal">Branding</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="block text-xs text-brand-muted mb-2 uppercase tracking-wider">Message</label>
-                            <textarea name="message" rows="4" required class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-brand-purple transition-colors resize-none" placeholder="Tell us about your project..."></textarea>
-                        </div>
-                        <button type="submit" class="w-full btn-premium py-4 rounded-lg bg-white text-black font-bold mt-4 hover-target">
-                            Submit Inquiry
-                        </button>
-                    </form>
-                </div>
-            </div>
-
-            <!-- Bottom Footer -->
-            <div class="max-w-7xl mx-auto px-6 border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-brand-muted">
-                <p>&copy; 2026 Digera Socials. All rights reserved.</p>
-                <div class="flex gap-6">
-                    <a href="https://www.instagram.com/digerasocials?igsh=MTdlNnVjaG5kZ2FuYg==" target="_blank" class="hover:text-white transition-colors hover-target"><i class="ph-fill ph-instagram-logo text-2xl"></i></a>
-                </div>
-            </div>
-        </footer>
-
-    </main>
-
-    <!-- GSAP & Lenis CDN -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <script src="https://unpkg.com/@studio-freight/lenis@1.0.32/dist/lenis.min.js"></script>
+<body>
+  
+  <div class="app-container">
     
-    <!-- Custom Scripts -->
-    <script src="script.js"></script>
+    <!-- FIXED LEFT DESKTOP SIDEBAR NAVIGATION -->
+    <nav class="sidebar">
+      <div class="sidebar-logo">
+        <a href="index.html">
+          <div class="studio-title">Creative Studio</div>
+          <div class="studio-subtitle">Interior Design & Bespoke Furniture</div>
+        </a>
+      </div>
+      
+      <ul class="nav-menu">
+        <li class="nav-item">
+          <a href="index.html" class="nav-link">Home</a>
+        </li>
+        <li class="nav-item">
+          <a href="about.html" class="nav-link">About Us</a>
+        </li>
+        <li class="nav-item">
+          <a href="services.html" class="nav-link">Services</a>
+        </li>
+        <li class="nav-item" id="nav-projects-parent">
+          <a href="projects.html" class="nav-link">Projects</a>
+          <ul class="nav-dropdown">
+            <li><a href="projects/residential.html" class="dropdown-link">Residential</a></li>
+            <li><a href="projects/commercial.html" class="dropdown-link">Commercial</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a href="products.html" class="nav-link">Products</a>
+        </li>
+        <li class="nav-item">
+          <a href="careers.html" class="nav-link">Careers</a>
+        </li>
+        <li class="nav-item">
+          <a href="contact.html" class="nav-link">Contact</a>
+        </li>
+      </ul>
+      
+      <div class="sidebar-footer">
+        <ul class="social-links">
+          <li><a href="#" class="social-link" aria-label="Instagram">IG</a></li>
+          <li><a href="#" class="social-link" aria-label="LinkedIn">LN</a></li>
+          <li><a href="#" class="social-link" aria-label="Pinterest">PT</a></li>
+        </ul>
+        <div class="copyright">
+          © 2026 Creative Studio.<br>All rights reserved.
+        </div>
+      </div>
+    </nav>
+    
+    <!-- MOBILE HEADER & DRAWER -->
+    <header class="mobile-header">
+      <a href="index.html" class="mobile-logo">
+        <span class="studio-title">Creative Studio</span>
+      </a>
+      <div class="hamburger" aria-label="Toggle Navigation Menu" aria-expanded="false">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </div>
+    </header>
+    
+    <nav class="mobile-overlay">
+      <ul class="mobile-nav-menu">
+        <li><a href="index.html" class="mobile-nav-link active">Home</a></li>
+        <li><a href="about.html" class="mobile-nav-link">About Us</a></li>
+        <li><a href="services.html" class="mobile-nav-link">Services</a></li>
+        <li>
+          <a href="projects.html" class="mobile-nav-link">Projects</a>
+          <ul class="mobile-nav-sub">
+            <li><a href="projects/residential.html" class="mobile-sub-link">Residential</a></li>
+            <li><a href="projects/commercial.html" class="mobile-sub-link">Commercial</a></li>
+          </ul>
+        </li>
+        <li><a href="products.html" class="mobile-nav-link">Products</a></li>
+        <li><a href="careers.html" class="mobile-nav-link">Careers</a></li>
+        <li><a href="contact.html" class="mobile-nav-link">Contact</a></li>
+      </ul>
+    </nav>
+    
+    <!-- MAIN CONTENT CONTAINER (FULLSCREEN LANDING GRID) -->
+    <main class="main-content">
+      
+      <!-- HERO SLIDER SECTION (6 Custom Slides) -->
+      <div class="hero-slider-container">
+        <!-- Slide 1 -->
+        <div class="hero-slide active">
+          <img src="assets/slideshow/04.jpg.jpeg" alt="Creative Studio Bespoke Interior Curation" style="width: 100%; height: 100%; object-fit: cover;" decoding="async">
+        </div>
+        <!-- Slide 2 -->
+        <div class="hero-slide">
+          <img src="assets/slideshow/05.jpg.jpeg" alt="Minimalist Tactile Workspace Design" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy" decoding="async">
+        </div>
+        <!-- Slide 3 -->
+        <div class="hero-slide">
+          <img src="assets/slideshow/07 (1).jpg.jpeg" alt="Structural Organic Residence Form" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy" decoding="async">
+        </div>
+        <!-- Slide 4 -->
+        <div class="hero-slide">
+          <img src="assets/slideshow/IMG_0801.jpg.jpeg" alt="Sophisticated Light-filled Space" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy" decoding="async">
+        </div>
+        <!-- Slide 5 -->
+        <div class="hero-slide">
+          <img src="assets/slideshow/IMG_6973 (2).jpg.jpeg" alt="Bespoke Geometric Furniture Details" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy" decoding="async">
+        </div>
+        <!-- Slide 6 -->
+        <div class="hero-slide">
+          <img src="assets/slideshow/IMG_9477.jpg.jpeg" alt="Premium Modern Architectural Framing" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy" decoding="async">
+        </div>
+        
+        <div class="hero-overlay"></div>
+      </div>
+      
+      <!-- GLASSMORPHIC BRAND CARD -->
+      <section class="hero-content" id="home-main-card">
+        <div class="glass-card">
+          <h1 class="studio-hero-title">CREATING<br><span>PURE SPACES</span></h1>
+          <p class="tagline">
+            Synthesizing spatial geometry, tactile material honesty, and natural light into refined residential architectural forms and sophisticated commercial structures.
+          </p>
+          <a href="projects.html" class="btn-minimal">DISCOVER WORK</a>
+        </div>
+      </section>
+      
+    </main>
+    
+  </div>
+
+  <!-- Global scripts -->
+  <script src="js/main.js"></script>
 </body>
 </html>

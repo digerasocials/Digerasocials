@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us — Creative Studio</title>
+  <meta name="description" content="Learn about our architectural history, our minimalist spatial vision, and the collaborative design committee leading the studio.">
+  
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+  
+  <div class="app-container">
+    
+    <!-- FIXED LEFT DESKTOP SIDEBAR NAVIGATION -->
+    <nav class="sidebar">
+      <div class="sidebar-logo">
+        <a href="index.html">
+          <div class="studio-title">Creative Studio</div>
+          <div class="studio-subtitle">Interior Design & Bespoke Furniture</div>
+        </a>
+      </div>
+      
+      <ul class="nav-menu">
+        <li class="nav-item">
+          <a href="index.html" class="nav-link">Home</a>
+        </li>
+        <li class="nav-item">
+          <a href="about.html" class="nav-link">About Us</a>
+        </li>
+        <li class="nav-item">
+          <a href="services.html" class="nav-link">Services</a>
+        </li>
+        <li class="nav-item" id="nav-projects-parent">
+          <a href="projects.html" class="nav-link">Projects</a>
+          <ul class="nav-dropdown">
+            <li><a href="projects/residential.html" class="dropdown-link">Residential</a></li>
+            <li><a href="projects/commercial.html" class="dropdown-link">Commercial</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a href="products.html" class="nav-link">Products</a>
+        </li>
+        <li class="nav-item">
+          <a href="careers.html" class="nav-link">Careers</a>
+        </li>
+        <li class="nav-item">
+          <a href="contact.html" class="nav-link">Contact</a>
+        </li>
+      </ul>
+      
+      <div class="sidebar-footer">
+        <ul class="social-links">
+          <li><a href="#" class="social-link" aria-label="Instagram">IG</a></li>
+          <li><a href="#" class="social-link" aria-label="LinkedIn">LN</a></li>
+          <li><a href="#" class="social-link" aria-label="Pinterest">PT</a></li>
+        </ul>
+        <div class="copyright">
+          © 2026 Creative Studio.<br>All rights reserved.
+        </div>
+      </div>
+    </nav>
+    
+    <!-- MOBILE HEADER & DRAWER -->
+    <header class="mobile-header">
+      <a href="index.html" class="mobile-logo">
+        <span class="studio-title">Creative Studio</span>
+      </a>
+      <div class="hamburger" aria-label="Toggle Navigation Menu" aria-expanded="false">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </div>
+    </header>
+    
+    <nav class="mobile-overlay">
+      <ul class="mobile-nav-menu">
+        <li><a href="index.html" class="mobile-nav-link">Home</a></li>
+        <li><a href="about.html" class="mobile-nav-link active">About Us</a></li>
+        <li><a href="services.html" class="mobile-nav-link">Services</a></li>
+        <li>
+          <a href="projects.html" class="mobile-nav-link">Projects</a>
+          <ul class="mobile-nav-sub">
+            <li><a href="projects/residential.html" class="mobile-sub-link">Residential</a></li>
+            <li><a href="projects/commercial.html" class="mobile-sub-link">Commercial</a></li>
+          </ul>
+        </li>
+        <li><a href="products.html" class="mobile-nav-link">Products</a></li>
+        <li><a href="careers.html" class="mobile-nav-link">Careers</a></li>
+        <li><a href="contact.html" class="mobile-nav-link">Contact</a></li>
+      </ul>
+    </nav>
+    
+    <!-- MAIN CONTENT AREA -->
+    <main class="main-content">
+      
+      <!-- PROFILE SECTION -->
+      <section class="section">
+        <div class="section-header fade-in">
+          <h1 class="section-title">Every Space Has a Story</h1>
+          <p class="section-desc">
+            At Creative Studio, we believe architecture is the background to human experience. We blend creativity, utility, and absolute precision to form spaces that reflect your lifestyle.
+          </p>
+        </div>
+        
+        <!-- EDITORIAL GRID -->
+        <div class="editorial-grid">
+          <div class="editorial-text fade-in">
+            <p class="manifesto-lead">
+              From raw concept to final execution, we focus on thoughtful space planning, material honesty, and elegant finishes to ensure every commission is unique and timeless.
+            </p>
+            <p class="section-desc" style="font-size:0.9rem;">
+              Whether it is a private estate, a high-end office, or a boutique retail showroom, we are committed to transforming your vision into a practical, beautifully crafted reality. We work in close collaboration with our clients to understand their needs, aspirations, and visual preferences.
+            </p>
+            <p class="section-desc" style="font-size:0.9rem;">
+              Every project is handled with rigorous care, maintaining a smooth, highly transparent workflow from initial space sketches to detailed material specs and final execution. Our passion lies in creating harmonious spaces that elevate everyday living.
+            </p>
+          </div>
+          
+          <div class="fade-in" style="transition-delay: 0.2s; aspect-ratio: 4/5; overflow: hidden;">
+            <img src="assets/projects/residential/03.jpg" onerror="this.src='assets/residential/03.jpg'; this.onerror=null;" alt="Bespoke Residential Spatial Form" class="editorial-img" loading="lazy" decoding="async">
+          </div>
+        </div>
+      </section>
+      
+      <!-- WHY CHOOSE US SECTION -->
+      <section class="section section-alt">
+        <div class="section-header fade-in">
+          <h2 class="section-title">Why Choose Us</h2>
+          <p class="section-desc">
+            We deliver highly customized, technically accurate, and visually breathtaking interiors designed to stand the test of time.
+          </p>
+        </div>
+        
+        <div class="team-grid">
+          <!-- Pillar 1 -->
+          <div class="team-card fade-in">
+            <div class="team-img-placeholder">
+              <!-- Replaced SVG icon with the optimized end-to-end custom image illustration -->
+              <img src="assets/content1/end to end.png" alt="End to End Spatial Delivery Plan" loading="lazy" decoding="async">
+            </div>
+            <h3 class="team-name">End-to-End Delivery</h3>
+            <p class="team-role">Complete Curation</p>
+            <p class="team-bio">
+              From residential homes to commercial and hospitality projects, we provide complete, end-to-end spatial solutions. This includes layouts, concept sketches, technical blueprints, and customized fittings.
+            </p>
+          </div>
+          
+          <!-- Pillar 2 -->
+          <div class="team-card fade-in" style="transition-delay: 0.15s;">
+            <div class="team-img-placeholder">
+              <!-- Replaced SVG icon with the optimized Floor Plan Layout image illustration -->
+              <img src="assets/content1/Floor Plan Layout.jpg.jpeg" alt="Precision Floor Plan Layout and Dimensions" loading="lazy" decoding="async">
+            </div>
+            <h3 class="team-name">Precision Layouts</h3>
+            <p class="team-role">Dimensional Excellence</p>
+            <p class="team-bio">
+              We focus on creating highly practical interiors with accurate dimensions, smart custom storage, and optimized layouts. We help you visualize every room with absolute dimensional fidelity.
+            </p>
+          </div>
+          
+          <!-- Pillar 3 -->
+          <div class="team-card fade-in" style="transition-delay: 0.3s;">
+            <div class="team-img-placeholder">
+              <!-- Replaced SVG icon with the optimized 3D render image illustration -->
+              <img src="assets/content1/3d render.jpeg" alt="High Fidelity 3D Spatial Visualization Render" loading="lazy" decoding="async">
+            </div>
+            <h3 class="team-name">Realistic 3D Renders</h3>
+            <p class="team-role">Pre-Execution Clarity</p>
+            <p class="team-bio">
+              We present realistic 3D spatial renders, working structural drawings, precise material specifications, and clear project timelines, letting you experience and refine the outcome before execution begins.
+            </p>
+          </div>
+        </div>
+      </section>
+      
+    </main>
+    
+  </div>
+
+  <!-- Global scripts -->
+  <script src="js/main.js"></script>
+</body>
+</html>
